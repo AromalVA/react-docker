@@ -3,4 +3,15 @@ services:
   - docker
 before-install : docker build -t aromalva/react-docker -f Dockerfile.dev .
 script:
-  - docker run -p 3000:3000 aromalva/react-docker
+  - docker run -e CI=true aromalva/react-docker npm run test
+deploy:
+  - provider: elasticbeanstalk
+  - region: "eu-north-1"
+  - app: "my-docker-project"
+  - env: "Docker-react-custom-env"
+  - bucket_name: "elasticbeanstalk-eu-north-1-637423557430"
+  - bucket_path: "my-docker-project"
+  - on:
+      branch: master
+  - access_key_id: $AWS_ACCESS_KEY
+  - secret_access_key: "$AWS_SECRET_KEY"

@@ -1,20 +1,8 @@
 version : '3'
 services:
-  react-server:
-    build:
+  react-app:
+    build :
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - 3000:3000
-    volumes:
-      - /reactproject/p1/node_modules
-      - .:/reactproject/p1
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /reactproject/p1/node_modules
-      - .:/reactproject/p1
-    command: ["npm","run","test"]
-      
+      - '80:80'
