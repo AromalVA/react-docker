@@ -3,4 +3,4 @@ services:
   - docker
 before-install : docker build -t aromalva/react-docker -f Dockerfile.dev .
 script:
-  - docker run aromalva/react-docker npm run test -- -- coverage
+  - docker run -e CI=true aromalva/react-docker npm run test
